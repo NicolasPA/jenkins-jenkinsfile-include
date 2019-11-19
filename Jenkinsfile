@@ -1,16 +1,21 @@
 #!groovy
 
-node {
+pipeline {
     stage('Shared') {
-        echo 'Shared stage'
+        steps(
+            echo 'Shared stage'
 
-        checkout scm
+            checkout scm
+        )
     }
-
-    if (env.JOB_NAME == 'Project 1') {
-        load 'Project1/Jenkinsfile'
-    } else if (env.JOB_NAME == 'Project 2') {
-        load 'Project2/Jenkinsfile'
-    }
+    stage('Run specific job') {
+        steps {
+            script{
+                if (env.JOB_NAME == 'Project 1') {
+                    load 'Project1/Jenkinsfile'
+                } else if (env.JOB_NAME == 'Project 2') {
+                    load 'Project2/Jenkinsfile'
+                }
+            }
+        }
 }
-
