@@ -1,5 +1,4 @@
 stage('Project 2 Stage') {
-    steps {
-        echo 'Project 2 Stage'
-    }
+    echo 'Project 2 Stage'
+    sh 'echo hello'
 }
